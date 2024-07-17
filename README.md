@@ -1,5 +1,3 @@
-# EV-Station-Website-full-stack-html-css-jquery-sql-php-babylonjs
-
 # EV Station Website
 
 ## Description
@@ -37,46 +35,33 @@ A full-stack web application for managing electric vehicle (EV) charging station
 
 ### Prerequisites
 
-- Web server (e.g., Apache, Nginx)
-- PHP 7.4 or higher
-- MySQL or MariaDB
-- Node.js and npm (for frontend dependencies)
+- XAMPP with PHP and MySQL
+- Web browser (e.g., Chrome, Firefox)
 
 ### Steps
 
-1. Clone the repository:
+1. Clone the repository into your XAMPP htdocs directory:
     ```sh
-    git clone https://github.com/Bifenzine/EV-Station-Website-full-stack-html-css-jquery-sql-php-babylonjs.git
-    cd EV-Station-Website-full-stack-html-css-jquery-sql-php-babylonjs
+    git clone https://github.com/Bifenzine/EV-Station-Website-full-stack-html-css-jquery-sql-php-babylonjs.git C:\xampp\htdocs\EV-Station
     ```
 
 2. Set up the database:
-    - Create a new database.
-    - Import the provided SQL file to set up the necessary tables:
-      ```sh
-      mysql -u your_username -p your_database < database/schema.sql
-      ```
+    - Open phpMyAdmin by going to `http://localhost/phpmyadmin` in your browser.
+    - Create a new database named `ev_station_db`.
+    - Import the provided SQL file located at `C:\xampp\htdocs\EV-Station\database\schema.sql` into the `ev_station_db` database.
 
 3. Configure the backend:
-    - Update the database configuration in `config.php`:
+    - Update the database configuration in `C:\xampp\htdocs\EV-Station\config.php`:
       ```php
-      define('DB_SERVER', 'your_server');
-      define('DB_USERNAME', 'your_username');
-      define('DB_PASSWORD', 'your_password');
-      define('DB_NAME', 'your_database');
+      define('DB_SERVER', 'localhost');
+      define('DB_USERNAME', 'root');
+      define('DB_PASSWORD', '');
+      define('DB_NAME', 'ev_station_db');
       ```
 
-4. Install frontend dependencies:
-    ```sh
-    npm install
-    ```
+4. Start your XAMPP Apache server and MySQL database through the XAMPP Control Panel.
 
-5. Start the development server:
-    ```sh
-    npm start
-    ```
-
-6. Access the application in your web browser at `http://localhost`.
+5. Access the application in your web browser at `http://localhost/EV-Station`.
 
 ## Usage
 
@@ -113,4 +98,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Contact
 
 For any inquiries or support, please contact [Your Name] at [your.email@example.com].
-
