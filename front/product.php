@@ -1,74 +1,23 @@
-
-
 <?php
-                  $sqlQuery = 'SELECT * FROM `vmx_charger` order by id_prod desc limit 1;';
-                  $products = $dbconn->prepare($sqlQuery);
-                  $products->execute();
-                  $mesproducts = $products->fetchAll();
-                  foreach ($mesproducts as $product) {
-                  ?>
+$sqlQuery = 'SELECT * FROM `vmx_charger` ORDER BY id_prod DESC LIMIT 1';
+$stmt = $dbconn->prepare($sqlQuery);
+$stmt->execute();
+$product = $stmt->fetch(PDO::FETCH_ASSOC);
 
+$isLoggedIn = isset($_SESSION['abonne']);
 
+$productDetails = [
+    'PRODUCT NAME' => $product['nom_prod'],
+    'PRICE' => $product['prix_prod'] . '$',
+    'DESCRIPTION' => $product['desc_prod'],
+    'WATTAGE' => $product['wattage_prod'],
+    'PRODUCT DIMENSIONS' => $product['dimension_prod'],
+    'NORMAL DELIVERY' => '4-5 Days',
+    'EXPRESS DELIVERY' => '2-3 Days',
+    'COD' => 'Available (All Over Morocco)'
+];
+?>
 
-
-
-<?php 
-              if(isset($_SESSION['abonne']))
-              {
-                ?>
-                <!-- ======= product Form ======= -->
-                <div class="productheader text-center" data-aos="flip-down" data-aos-anchor-placement="top-center" data-aos-duration="1000">PRODUCT</div>
-
-<div class="container py-4 my-4 mx-auto d-flex flex-column productcontainer">
-    <div class="header">
-        <div class="row r1">
-            <div class="col-md-9 abc" data-aos="flip-down" data-aos-anchor-placement="top-center" data-aos-duration="1000">
-                <h1>EV CHARGER VMX</h1>
-            </div>
-            <div class="col-md-3 text-right pqr"></div>
-            
-        </div>
-    </div>
-    <div class="container-body mt-4">
-        <div class="row r3">
-            <div class="col-md-5 p-0 klo">
-                <ul>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">PRODUCT NAME : <?php echo $product['nom_prod']; ?></li>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">PRICE : <?php echo $product['prix_prod']; ?>$</li>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">DESCRIPTION : <?php echo $product['desc_prod']; ?></li>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">WATTAGE: <?php echo $product['wattage_prod']; ?></li>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">PRODUCT DIMENSIONS : <?php echo $product['dimension_prod']; ?></li>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">NORMAL DELIVERY : 4-5 Days</li>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">EXPRESS DELIVERY : 2-3 Days</li>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">COD Available (All Over Morocco)</li>
-                </ul>
-            </div>
-            
-           
-            <div class="col-md-7 vans">
-                <babylon model="http://localhost/wb/charger.glb" templates.main.params.fill-screen="true"></babylon></div>
-
-              </div>
-              
-             
-
-</div>
-    <div class="footer d-flex flex-column mt-5">
-        <div class="row r4">
-            <div class="col-md-2 myt des"><a href="#">Description</a></div>
-            <div class="col-md-2 myt "><button type="button" class="btn btn-outline-warning"><a href="#" data-bs-toggle="modal" data-bs-target="#modalProduct">BUY NOW</a></button></div>
-        </div>
-    </div>
-</div>
-</div>
-            
-                <?php
-              }
-              else
-              {
-                ?>
-
-<!-- ======= product Form ======= -->
 <div class="productheader text-center" data-aos="flip-down" data-aos-anchor-placement="top-center" data-aos-duration="1000">PRODUCT</div>
 
 <div class="container py-4 my-4 mx-auto d-flex flex-column productcontainer">
@@ -77,44 +26,42 @@
             <div class="col-md-9 abc" data-aos="flip-down" data-aos-anchor-placement="top-center" data-aos-duration="1000">
                 <h1>EV CHARGER VMX</h1>
             </div>
-            <div class="col-md-3 text-right pqr"></div>
-            
         </div>
     </div>
+
     <div class="container-body mt-4">
         <div class="row r3">
             <div class="col-md-5 p-0 klo">
                 <ul>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">PRODUCT NAME : <?php echo $product['nom_prod']; ?></li>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">PRICE : <?php echo $product['prix_prod']; ?>$</li>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">DESCRIPTION : <?php echo $product['desc_prod']; ?></li>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">WARRANTY : 12 Months Warranty</li>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">PRODUCT DIMENSIONS : <?php echo $product['dimension_prod']; ?></li>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">NORMAL DELIVERY : 4-5 Days</li>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">EXPRESS DELIVERY : 2-3 Days</li>
-                    <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">COD Available (All Over Morocco)</li>
+                    <?php foreach ($productDetails as $label => $value): ?>
+                        <li data-aos="flip-down" data-aos-duration="1000" data-aos-anchor-placement="bottom-bottom">
+                            <?= htmlspecialchars($label) ?>: <?= htmlspecialchars($value) ?>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
-            
-            
             <div class="col-md-7 vans">
-                <babylon model="http://localhost/wb/charger.glb" templates.main.params.fill-screen="true"></babylon></div>
+                <babylon model="http://localhost/wb/concept_charging_station.glb" templates.main.params.fill-screen="true" light-intensity="1.5">
+                </babylon>
             </div>
-              
-              
+        </div>
+    </div>
 
-</div>
     <div class="footer d-flex flex-column mt-5">
         <div class="row r4">
             <div class="col-md-2 myt des"><a href="#">Description</a></div>
-        <!-- button connexion-->
-        <h2><a class="form-control-comment"  href="#" data-bs-toggle="modal" data-bs-target="#modalLogin">Sign-up to buy the product</a></h2>
-        <!-- fin button connexion -->
-          </div>
+            <?php if ($isLoggedIn): ?>
+                <div class="col-md-2 myt">
+                    <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#modalProduct">BUY NOW</button>
+                </div>
+            <?php else: ?>
+                <h2><a class="form-control-comment" href="#" data-bs-toggle="modal" data-bs-target="#modalLogin">Sign-up to buy the product</a></h2>
+            <?php endif; ?>
+        </div>
     </div>
 </div>
-</div>              <?php
-              }
+
+<?php
 
 ?>
 
@@ -214,15 +161,9 @@
             An Email containing further details was sent to your account Please check it out.
       </div>
       <div class="modal-footer">
-      
       <button style="text-decoration:none;" class="btn btninscription"><a href="index.php">Home Page</a></button>
       </div>
       </form>
     </div>
   </div>
 </div>
-
-<?php
-              }
-
-?>

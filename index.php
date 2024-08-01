@@ -56,7 +56,7 @@ if((isset($_POST['chnom']))&&(isset($_POST['chmail']))&&(isset($_POST['chpw'])))
 
     
 
-   if($sizeAvatar>100000)
+   if($sizeAvatar>1000000)
    {
     $erreurInscription="Fichier volumineux Max 190Ko";
    }
