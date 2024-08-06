@@ -1,8 +1,8 @@
 # EV Station Website
 
-![](assets/screen.PNG)
+![](assets/screen.jpg)
 
-![](assets/mock.PNG)
+![](assets/mock.jpg)
 
 ## Description
 
