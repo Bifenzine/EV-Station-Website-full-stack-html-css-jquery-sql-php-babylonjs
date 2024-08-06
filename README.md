@@ -1,5 +1,9 @@
 # EV Station Website
 
+![](assets/screen.PNG)
+
+![](assets/mock.PNG)
+
 ## Description
 
 A full-stack web application for managing electric vehicle (EV) charging stations. This project incorporates HTML, CSS, jQuery, SQL, PHP, and Babylon.js for a comprehensive and interactive user experience.
